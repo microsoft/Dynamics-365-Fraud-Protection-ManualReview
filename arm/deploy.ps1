@@ -66,8 +66,7 @@ Write-Host "=== Setting Azure context..."
 if (!(Set-AzContext -SubscriptionId $subscriptionId -TenantId $tenantId -ErrorAction Ignore)) {
   Write-Host "= Login to Azure"
   Write-Host "Provide credentials for PS in tenant ${tenantId} and subscription ${subscriptionId}"
-  Login-AzAccount
-  Set-AzContext -SubscriptionId $subscriptionId -TenantId $tenantId
+  
 }
 $currentAzureContext = Get-AzContext
 
@@ -82,12 +81,6 @@ if (!($output)) {
 }
 az account set --subscription $subscriptionId
 
-# Init AzureAD in windows environment
-if (CheckOSWindows)
-{
-    # Will skip re-prompting credentials for AzureAD module
-    Connect-AzureAD -TenantId $currentAzureContext.Tenant.Id -AccountId $currentAzureContext.Account.Id
-}
 
 # Register providers
 Write-Host "=== Register Azure resource providers"
