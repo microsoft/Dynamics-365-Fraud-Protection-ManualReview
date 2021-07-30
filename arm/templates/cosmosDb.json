@@ -53,7 +53,7 @@
       },
       "autoscaleMaxThroughputAnalyticsDb": {
         "type": "int",
-        "defaultValue": 4000,
+        "defaultValue": 10000,
         "minValue": 4000,
         "maxValue": 100000,
         "metadata": {
@@ -62,7 +62,7 @@
       },
       "autoscaleMaxThroughputQueuesDb": {
         "type": "int",
-        "defaultValue": 4000,
+        "defaultValue": 10000,
         "minValue": 4000,
         "maxValue": 100000,
         "metadata": {
