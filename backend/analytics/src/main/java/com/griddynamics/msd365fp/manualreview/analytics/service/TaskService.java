@@ -3,14 +3,14 @@
 
 package com.griddynamics.msd365fp.manualreview.analytics.service;
 
-import com.azure.data.cosmos.PreconditionFailedException;
+import com.azure.cosmos.implementation.PreconditionFailedException;
 import com.griddynamics.msd365fp.manualreview.analytics.config.properties.ApplicationProperties;
 import com.griddynamics.msd365fp.manualreview.analytics.model.persistence.Task;
 import com.griddynamics.msd365fp.manualreview.analytics.repository.TaskRepository;
 import com.griddynamics.msd365fp.manualreview.analytics.service.dashboard.CollectedInfoService;
 import com.griddynamics.msd365fp.manualreview.model.TaskStatus;
 import com.griddynamics.msd365fp.manualreview.model.exception.IncorrectConfigurationException;
-import com.microsoft.azure.spring.data.cosmosdb.exception.CosmosDBAccessException;
+import com.azure.spring.data.cosmos.exception.CosmosAccessException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -193,7 +193,7 @@ public class TaskService {
                     task.setLastFailedRunMessage("Restored after long downtime");
                     taskRepository.save(task);
                     log.info("Task [{}] has been restored", task.getId());
-                } catch (CosmosDBAccessException e) {
+                } catch (CosmosAccessException e) {
                     log.warn("Task [{}] recovering ended with a conflict: {}", task.getId(), e.getMessage());
                 }
             }
@@ -210,7 +210,7 @@ public class TaskService {
                     .status(READY)
                     .build());
             log.info("Task [{}] has been initialized successfully.", taskName);
-        } catch (CosmosDBAccessException e) {
+        } catch (CosmosAccessException e) {
             log.warn("Task [{}] creation ended with a conflict: {}", taskName, e.getMessage());
         }
     }
@@ -264,7 +264,7 @@ public class TaskService {
         Task runningTask;
         try {
             runningTask = taskRepository.save(task);
-        } catch (CosmosDBAccessException e) {
+        } catch (CosmosAccessException e) {
             if (e.getCause() instanceof PreconditionFailedException) {
                 log.debug("Could not acquire lock because task [{}] was modified by another source.", task.getId());
             } else {

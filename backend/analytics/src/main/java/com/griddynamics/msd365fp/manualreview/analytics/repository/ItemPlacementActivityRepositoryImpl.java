@@ -42,7 +42,7 @@ public class ItemPlacementActivityRepositoryImpl implements ItemPlacementActivit
                         aggregation.getSeconds(),
                         CollectionUtils.isEmpty(queueIds) ? "" :
                                 String.format("AND c.queueId IN ('%1$s') ", String.join("','", queueIds))))
-                .map(cip -> itemPlacementActivityContainer.castCosmosObjectToClassInstance(cip.toJson(), ItemPlacementBucket.class))
+                .map(cip -> itemPlacementActivityContainer.castCosmosObjectToClassInstance(cip, ItemPlacementBucket.class))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());

@@ -19,7 +19,7 @@ import com.griddynamics.msd365fp.manualreview.queues.model.persistence.Item;
 import com.griddynamics.msd365fp.manualreview.queues.model.persistence.Queue;
 import com.griddynamics.msd365fp.manualreview.queues.repository.HealthCheckRepository;
 import com.griddynamics.msd365fp.manualreview.queues.repository.QueueRepository;
-import com.microsoft.azure.spring.data.cosmosdb.exception.CosmosDBAccessException;
+import com.azure.spring.data.cosmos.exception.CosmosAccessException;
 import io.github.resilience4j.retry.annotation.Retry;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -135,7 +135,7 @@ public class StreamService implements HealthCheckProcessor {
                             try {
                                 healthCheck.setCreated(OffsetDateTime.now());
                                 healthCheckRepository.save(healthCheck);
-                            } catch (CosmosDBAccessException e) {
+                            } catch (CosmosAccessException e) {
                                 log.debug("Receiver already inserted this [{}] health-check entry", healthCheck.getId());
                             }
                         }));

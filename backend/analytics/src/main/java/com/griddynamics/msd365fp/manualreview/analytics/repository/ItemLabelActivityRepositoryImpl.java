@@ -55,7 +55,7 @@ public class ItemLabelActivityRepositoryImpl implements ItemLabelActivityReposit
                                 String.format("AND c.analystId IN ('%1$s') ", String.join("','", analystIds)),
                         CollectionUtils.isEmpty(queueIds) ? "" :
                                 String.format("AND c.queueId IN ('%1$s') ", String.join("','", queueIds))))
-                .map(cip -> itemLabelActivityContainer.castCosmosObjectToClassInstance(cip.toJson(), ItemLabelingBucket.class))
+                .map(cip -> itemLabelActivityContainer.castCosmosObjectToClassInstance(cip, ItemLabelingBucket.class))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());
@@ -85,7 +85,7 @@ public class ItemLabelActivityRepositoryImpl implements ItemLabelActivityReposit
                                 String.format("AND c.analystId IN ('%1$s') ", String.join("','", analystIds)),
                         CollectionUtils.isEmpty(queueIds) ? "" :
                                 String.format("AND c.queueId IN ('%1$s') ", String.join("','", queueIds))))
-                .map(cip -> itemLabelActivityContainer.castCosmosObjectToClassInstance(cip.toJson(), ItemLabelingBucket.class))
+                .map(cip -> itemLabelActivityContainer.castCosmosObjectToClassInstance(cip, ItemLabelingBucket.class))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());
@@ -114,7 +114,7 @@ public class ItemLabelActivityRepositoryImpl implements ItemLabelActivityReposit
                                 String.format("AND c.analystId IN ('%1$s') ", String.join("','", analystIds)),
                         CollectionUtils.isEmpty(queueIds) ? "" :
                                 String.format("AND c.queueId IN ('%1$s') ", String.join("','", queueIds))))
-                .map(cip -> itemLabelActivityContainer.castCosmosObjectToClassInstance(cip.toJson(), ItemLabelingBucket.class))
+                .map(cip -> itemLabelActivityContainer.castCosmosObjectToClassInstance(cip, ItemLabelingBucket.class))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());
@@ -138,7 +138,7 @@ public class ItemLabelActivityRepositoryImpl implements ItemLabelActivityReposit
                         endDateTime.toEpochSecond(),
                         CollectionUtils.isEmpty(analystIds) ? "" :
                                 String.format("AND c.analystId IN ('%1$s') ", String.join("','", analystIds))))
-                .map(cip -> itemLabelActivityContainer.castCosmosObjectToClassInstance(cip.toJson(), ItemLabelingBucket.class))
+                .map(cip -> itemLabelActivityContainer.castCosmosObjectToClassInstance(cip, ItemLabelingBucket.class))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());
@@ -166,7 +166,7 @@ public class ItemLabelActivityRepositoryImpl implements ItemLabelActivityReposit
                                 String.format("AND c.analystId IN ('%1$s') ", String.join("','", analystIds)),
                         CollectionUtils.isEmpty(queueIds) ? "" :
                                 String.format("AND c.queueId IN ('%1$s') ", String.join("','", queueIds))))
-                .map(cip -> itemLabelActivityContainer.castCosmosObjectToClassInstance(cip.toJson(), LabelingTimeBucket.class))
+                .map(cip -> itemLabelActivityContainer.castCosmosObjectToClassInstance(cip, LabelingTimeBucket.class))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());
@@ -212,7 +212,7 @@ public class ItemLabelActivityRepositoryImpl implements ItemLabelActivityReposit
                         String.format("AND c.label IN ('%1$s') ", labelsThatFormResolutionAsString)
                 )
         )
-                .map(cip -> itemLabelActivityContainer.castCosmosObjectToClassInstance(cip.toJson(), LabelBucket.class))
+                .map(cip -> itemLabelActivityContainer.castCosmosObjectToClassInstance(cip, LabelBucket.class))
                 .filter(Optional::isPresent)
                 .map(Optional::get);
     }

@@ -13,7 +13,7 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
-    compileOnly {
+    implementation {
         extendsFrom annotationProcessor
     }
 }
@@ -32,7 +32,7 @@ jar {
 }
 
 dependencies {
-    compile project(path: ':model', configuration: 'default')
+    implementation project(path: ':model', configuration: 'default')
 
 //	  Common
     implementation 'org.springframework:spring-core'
@@ -40,7 +40,7 @@ dependencies {
 //    Web
     implementation 'org.modelmapper:modelmapper:2.3.7'
     implementation 'org.springframework:spring-webflux'
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client:2.5.3'
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.11.2'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.2'
 }

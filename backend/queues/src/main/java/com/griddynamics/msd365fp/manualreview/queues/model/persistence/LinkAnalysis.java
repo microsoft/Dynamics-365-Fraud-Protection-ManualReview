@@ -4,8 +4,8 @@
 package com.griddynamics.msd365fp.manualreview.queues.model.persistence;
 
 import com.griddynamics.msd365fp.manualreview.queues.model.LinkAnalysisField;
-import com.microsoft.azure.spring.data.cosmosdb.core.mapping.Document;
-import com.microsoft.azure.spring.data.cosmosdb.core.mapping.PartitionKey;
+import com.azure.spring.data.cosmos.core.mapping.Container;
+import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
@@ -23,7 +23,7 @@ import static com.griddynamics.msd365fp.manualreview.queues.config.Constants.LIN
 @Data
 @Builder
 @EqualsAndHashCode(exclude = "_etag")
-@Document(collection = LINK_ANALYSIS_CONTAINER_NAME)
+@Container(containerName = LINK_ANALYSIS_CONTAINER_NAME)
 public class LinkAnalysis {
     @Id
     @PartitionKey

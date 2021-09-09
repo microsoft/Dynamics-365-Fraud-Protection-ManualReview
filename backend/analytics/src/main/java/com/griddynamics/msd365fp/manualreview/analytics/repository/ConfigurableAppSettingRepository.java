@@ -5,7 +5,7 @@ package com.griddynamics.msd365fp.manualreview.analytics.repository;
 
 import com.griddynamics.msd365fp.manualreview.analytics.model.persistence.ConfigurableAppSetting;
 import com.griddynamics.msd365fp.manualreview.analytics.model.AppSettingsType;
-import com.microsoft.azure.spring.data.cosmosdb.repository.CosmosRepository;
+import com.azure.spring.data.cosmos.repository.CosmosRepository;
 
 import java.util.List;
 

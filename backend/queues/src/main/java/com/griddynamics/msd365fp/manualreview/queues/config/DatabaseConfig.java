@@ -3,8 +3,10 @@
 
 package com.griddynamics.msd365fp.manualreview.queues.config;
 
-import com.azure.data.cosmos.CosmosClient;
-import com.azure.data.cosmos.CosmosDatabase;
+
+import com.azure.cosmos.CosmosAsyncClient;
+
+import com.azure.cosmos.CosmosAsyncDatabase;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.griddynamics.msd365fp.manualreview.cosmos.utilities.ExtendedCosmosContainer;
 import lombok.RequiredArgsConstructor;
@@ -25,23 +27,23 @@ public class DatabaseConfig {
     private final ObjectMapper jsonMapper;
 
     @Bean
-    public CosmosDatabase cosmosDatabase(CosmosClient cosmosClient,
-                                         @Value("${azure.cosmosdb.database}") String databaseId) {
+    public CosmosAsyncDatabase cosmosDatabase(CosmosAsyncClient cosmosClient,
+                                              @Value("${azure.cosmosdb.database}") String databaseId) {
         return cosmosClient.getDatabase(databaseId);
     }
 
     @Bean
-    public ExtendedCosmosContainer itemsContainer(CosmosDatabase cosmosDatabase) {
+    public ExtendedCosmosContainer itemsContainer(CosmosAsyncDatabase cosmosDatabase) {
         return new ExtendedCosmosContainer(cosmosDatabase.getContainer(ITEMS_CONTAINER_NAME), jsonMapper);
     }
 
     @Bean
-    public ExtendedCosmosContainer queuesContainer(CosmosDatabase cosmosDatabase) {
+    public ExtendedCosmosContainer queuesContainer(CosmosAsyncDatabase cosmosDatabase) {
         return new ExtendedCosmosContainer(cosmosDatabase.getContainer(QUEUES_CONTAINER_NAME), jsonMapper);
     }
 
     @Bean
-    public ExtendedCosmosContainer dictionariesContainer(CosmosDatabase cosmosDatabase) {
+    public ExtendedCosmosContainer dictionariesContainer(CosmosAsyncDatabase cosmosDatabase) {
         return new ExtendedCosmosContainer(cosmosDatabase.getContainer(DICTIONARIES_CONTAINER_NAME), jsonMapper);
     }
 }

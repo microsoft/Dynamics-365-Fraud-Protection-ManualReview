@@ -9,8 +9,8 @@ import com.griddynamics.msd365fp.manualreview.model.dfp.AssesmentResult;
 import com.griddynamics.msd365fp.manualreview.model.dfp.MainPurchase;
 import com.griddynamics.msd365fp.manualreview.queues.model.BasicItemInfo;
 import com.griddynamics.msd365fp.manualreview.queues.model.ItemEvent;
-import com.microsoft.azure.spring.data.cosmosdb.core.mapping.Document;
-import com.microsoft.azure.spring.data.cosmosdb.core.mapping.PartitionKey;
+import com.azure.spring.data.cosmos.core.mapping.Container;
+import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
@@ -28,7 +28,7 @@ import static com.griddynamics.msd365fp.manualreview.queues.config.Constants.ITE
 @Data
 @Builder(toBuilder = true)
 @EqualsAndHashCode(exclude = "_etag")
-@Document(collection = ITEMS_CONTAINER_NAME)
+@Container(containerName = ITEMS_CONTAINER_NAME)
 public class Item implements BasicItemInfo, Serializable {
     @Id
     @PartitionKey

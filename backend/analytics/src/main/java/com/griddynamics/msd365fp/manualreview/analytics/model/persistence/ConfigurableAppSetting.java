@@ -4,8 +4,8 @@
 package com.griddynamics.msd365fp.manualreview.analytics.model.persistence;
 
 import com.griddynamics.msd365fp.manualreview.analytics.model.AppSettingsType;
-import com.microsoft.azure.spring.data.cosmosdb.core.mapping.Document;
-import com.microsoft.azure.spring.data.cosmosdb.core.mapping.PartitionKey;
+import com.azure.spring.data.cosmos.core.mapping.Container;
+import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,7 +20,7 @@ import static com.griddynamics.msd365fp.manualreview.analytics.config.Constants.
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode(exclude = "_etag")
-@Document(collection = APP_SETTINGS_CONTAINER_NAME)
+@Container(containerName = APP_SETTINGS_CONTAINER_NAME)
 public class ConfigurableAppSetting {
 
     @Id

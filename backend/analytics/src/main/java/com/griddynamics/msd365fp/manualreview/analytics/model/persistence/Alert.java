@@ -7,8 +7,8 @@ import com.griddynamics.msd365fp.manualreview.analytics.model.AlertCheck;
 import com.griddynamics.msd365fp.manualreview.analytics.model.AlertNotification;
 import com.griddynamics.msd365fp.manualreview.analytics.model.MetricType;
 import com.griddynamics.msd365fp.manualreview.analytics.model.ThresholdOperator;
-import com.microsoft.azure.spring.data.cosmosdb.core.mapping.Document;
-import com.microsoft.azure.spring.data.cosmosdb.core.mapping.PartitionKey;
+import com.azure.spring.data.cosmos.core.mapping.Container;
+import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -25,7 +25,7 @@ import static com.griddynamics.msd365fp.manualreview.analytics.config.Constants.
  */
 @Data
 @NoArgsConstructor
-@Document(collection = ALERT_CONTAINER_NAME)
+@Container(containerName = ALERT_CONTAINER_NAME)
 @EqualsAndHashCode(exclude = "_etag")
 public class Alert {
 

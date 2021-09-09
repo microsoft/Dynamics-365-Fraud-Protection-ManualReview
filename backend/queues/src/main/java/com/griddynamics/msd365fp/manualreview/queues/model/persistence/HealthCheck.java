@@ -4,8 +4,8 @@
 package com.griddynamics.msd365fp.manualreview.queues.model.persistence;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.microsoft.azure.spring.data.cosmosdb.core.mapping.Document;
-import com.microsoft.azure.spring.data.cosmosdb.core.mapping.PartitionKey;
+import com.azure.spring.data.cosmos.core.mapping.Container;
+import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
@@ -19,7 +19,7 @@ import static com.griddynamics.msd365fp.manualreview.queues.config.Constants.HEA
 @Data
 @Builder
 @EqualsAndHashCode(exclude = "_etag")
-@Document(collection = HEALTH_CHECK_CONTAINER_NAME)
+@Container(containerName = HEALTH_CHECK_CONTAINER_NAME)
 public class HealthCheck {
     @Id
     @PartitionKey

@@ -8,8 +8,8 @@ import com.griddynamics.msd365fp.manualreview.model.Label;
 import com.griddynamics.msd365fp.manualreview.queues.model.ItemFilter;
 import com.griddynamics.msd365fp.manualreview.queues.model.QueueSortSettings;
 import com.griddynamics.msd365fp.manualreview.queues.model.QueueViewSettings;
-import com.microsoft.azure.spring.data.cosmosdb.core.mapping.Document;
-import com.microsoft.azure.spring.data.cosmosdb.core.mapping.PartitionKey;
+import com.azure.spring.data.cosmos.core.mapping.Container;
+import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
@@ -28,7 +28,7 @@ import static com.griddynamics.msd365fp.manualreview.queues.config.Constants.QUE
 @Data
 @Builder(toBuilder = true)
 @EqualsAndHashCode(exclude = "_etag")
-@Document(collection = QUEUES_CONTAINER_NAME)
+@Container(containerName = QUEUES_CONTAINER_NAME)
 public class Queue implements Serializable {
     @Id
     @PartitionKey

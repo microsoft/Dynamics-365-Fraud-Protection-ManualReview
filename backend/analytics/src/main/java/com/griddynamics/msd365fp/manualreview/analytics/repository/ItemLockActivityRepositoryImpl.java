@@ -45,7 +45,7 @@ public class ItemLockActivityRepositoryImpl implements ItemLockActivityRepositor
                                 String.format("AND c.ownerId IN ('%1$s') ", String.join("','", analystIds)),
                         CollectionUtils.isEmpty(queueIds) ? "" :
                                 String.format("AND c.queueId IN ('%1$s') ", String.join("','", queueIds))))
-                .map(cip -> itemLockActivityContainer.castCosmosObjectToClassInstance(cip.toJson(), LockTimeBucket.class))
+                .map(cip -> itemLockActivityContainer.castCosmosObjectToClassInstance(cip, LockTimeBucket.class))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());

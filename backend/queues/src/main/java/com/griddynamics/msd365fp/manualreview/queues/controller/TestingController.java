@@ -3,11 +3,14 @@
 
 package com.griddynamics.msd365fp.manualreview.queues.controller;
 
-import com.azure.data.cosmos.CosmosClient;
-import com.azure.data.cosmos.CosmosContainer;
+import com.azure.cosmos.CosmosAsyncClient;
+import com.azure.cosmos.CosmosAsyncContainer;
+import com.azure.cosmos.models.PartitionKey;
+import com.azure.cosmos.models.CosmosItemRequestOptions;
 import com.azure.messaging.eventhubs.EventData;
 import com.azure.messaging.eventhubs.EventHubClientBuilder;
 import com.azure.messaging.eventhubs.EventHubProducerAsyncClient;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -85,7 +88,7 @@ public class TestingController {
     @Qualifier("cosmosdbObjectMapper")
     private final ObjectMapper mapper;
     private final DurableEventHubProducerClientRegistry clientRegistry;
-    private final CosmosClient cosmosClient;
+    private final CosmosAsyncClient cosmosClient;
     @Setter(onMethod = @__({@Autowired, @Qualifier("azureDFPAPIWebClient")}))
     private WebClient dfpClient;
     private final Random rand = new Random();
@@ -179,7 +182,7 @@ public class TestingController {
         if (fromRegexpList.size() != toStringList.size()) {
             throw new IncorrectConditionException("amounts of tags and replacements aren't match");
         }
-        CosmosContainer container = cosmosClient.getDatabase(dbName).getContainer(containerName);
+        CosmosAsyncContainer container = cosmosClient.getDatabase(dbName).getContainer(containerName);
         ExtendedCosmosContainer extendedContainer = new ExtendedCosmosContainer(container, mapper);
         String query = String.format(
                 "SELECT string FROM (SELECT VALUE toString(c) from c) string where %s",
@@ -198,13 +201,13 @@ public class TestingController {
                             continuation);
                     return new PageableCollection<>(
                             res.getContent()
-                                    .map(cip -> cip.getString("string"))
+                                    .map(cip -> cip.get("string"))
                                     .collect(Collectors.toSet()),
                             res.getContinuationToken());
                 },
                 collection -> collection.stream()
                         .map(str -> {
-                            String result = str;
+                            String result = str.toString();
                             for (Map.Entry<String, String> entry : replacements.entrySet()) {
                                 result = result.replaceAll(entry.getKey(), entry.getValue());
                             }
@@ -293,10 +296,11 @@ public class TestingController {
             @Parameter(hidden = true)
             @AuthenticationPrincipal PreAuthenticatedAuthenticationToken principal,
             @RequestBody List<Map<String, String>> ids) {
-        CosmosContainer container = cosmosClient.getDatabase(dbName).getContainer(containerName);
+        CosmosAsyncContainer container = cosmosClient.getDatabase(dbName).getContainer(containerName);
         List<String> toDelete = ids.stream().map(mp -> mp.get("id")).collect(Collectors.toList());
+        CosmosItemRequestOptions options = new CosmosItemRequestOptions();
         toDelete.forEach(id ->
-                container.getItem(id, id).delete().block());
+                container.deleteItem(id,new PartitionKey(containerName)));
         log.warn("User [{}] has deleted items [{}].", UserPrincipalUtility.extractUserId(principal), toDelete);
     }
 

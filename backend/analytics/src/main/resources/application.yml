@@ -161,4 +161,4 @@ resilience4j.retry:
       maxRetryAttempts: 3
       waitDuration: 0s
       retryExceptions:
-        - com.microsoft.azure.spring.data.cosmosdb.exception.CosmosDBAccessException
+        - com.microsoft.azure.spring.data.cosmosdb.exception.CosmosAccessException

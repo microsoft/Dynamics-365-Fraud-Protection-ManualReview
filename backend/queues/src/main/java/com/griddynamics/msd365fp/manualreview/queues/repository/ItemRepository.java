@@ -3,8 +3,9 @@
 
 package com.griddynamics.msd365fp.manualreview.queues.repository;
 
+import com.azure.spring.data.cosmos.repository.CosmosRepository;
 import com.griddynamics.msd365fp.manualreview.queues.model.persistence.Item;
-import com.microsoft.azure.spring.data.cosmosdb.repository.CosmosRepository;
+
 
 import java.util.List;
 

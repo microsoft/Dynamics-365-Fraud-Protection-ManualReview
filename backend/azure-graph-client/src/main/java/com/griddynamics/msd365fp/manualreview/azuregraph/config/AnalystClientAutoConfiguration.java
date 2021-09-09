@@ -24,7 +24,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 @ConditionalOnClass(AnalystClient.class)
 @EnableConfigurationProperties(AnalystClientProperties.class)
 public class AnalystClientAutoConfiguration {
-    public static final String CLIENT_REGISTRATION_AZURE_GRAPH_API = "azure-graph-api";
+    public static final String CLIENT_REGISTRATION_AZURE_GRAPH_API = "azure";
 
     @Bean
     @ConditionalOnBean(OAuth2AuthorizedClientManager.class)
@@ -41,6 +41,12 @@ public class AnalystClientAutoConfiguration {
         return WebClient.builder()
                 .apply(oauth2Client.oauth2Configuration())
                 .build();
+
+
+//        ServletOAuth2AuthorizedClientExchangeFilterFunction oauth2 = new ServletOAuth2AuthorizedClientExchangeFilterFunction(authorizedClientManager);
+//        return WebClient.builder()
+//                .apply(oauth2.oauth2Configuration())
+//                .build();
     }
 
     @Bean

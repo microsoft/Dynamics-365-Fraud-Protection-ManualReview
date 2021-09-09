@@ -3,6 +3,7 @@
 
 package com.griddynamics.msd365fp.manualreview.dfpauth.security;
 
+import com.azure.spring.autoconfigure.aad.UserPrincipal;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.griddynamics.msd365fp.manualreview.azuregraph.client.AnalystClient;
@@ -10,7 +11,7 @@ import com.griddynamics.msd365fp.manualreview.dfpauth.config.properties.DFPRoleE
 import com.griddynamics.msd365fp.manualreview.dfpauth.util.UserPrincipalUtility;
 import com.griddynamics.msd365fp.manualreview.model.Analyst;
 import com.griddynamics.msd365fp.manualreview.model.exception.IncorrectConfigurationException;
-import com.microsoft.azure.spring.autoconfigure.aad.UserPrincipal;
+
 import com.nimbusds.jwt.JWTClaimsSet;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -100,10 +101,10 @@ public class DFPRoleExtractionFilter extends OncePerRequestFilter {
             for (Map.Entry<String, Object> entry : principal.getClaims().entrySet()) {
                 claimsSetBuilder.claim(entry.getKey(), entry.getValue());
             }
-            claimsSetBuilder.claim(AUTH_TOKEN_PRINCIPAL_ID_CLAIM, virtualUserName);
-            UserPrincipal newPrincipal = new UserPrincipal(null, claimsSetBuilder.build());
+            principal.getClaims().put(AUTH_TOKEN_PRINCIPAL_ID_CLAIM, virtualUserName);
+
             log.debug("Virtual user with ID [{}] will be used as authentication principal", virtualUserName);
-            return newPrincipal;
+            return principal;
         } catch (Exception e) {
             log.warn("User [{}] tried to authenticate with virtual user [{}].", userId, virtualUserName, e);
         }

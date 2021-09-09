@@ -3,14 +3,15 @@
 
 package com.griddynamics.msd365fp.manualreview.analytics.model.persistence;
 
+import com.azure.spring.data.cosmos.core.mapping.Container;
+import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.griddynamics.msd365fp.manualreview.analytics.model.DFPResolutionSendResult;
 import com.griddynamics.msd365fp.manualreview.model.ItemEscalation;
 import com.griddynamics.msd365fp.manualreview.model.ItemHold;
 import com.griddynamics.msd365fp.manualreview.model.ItemLabel;
 import com.griddynamics.msd365fp.manualreview.model.ItemNote;
-import com.microsoft.azure.spring.data.cosmosdb.core.mapping.Document;
-import com.microsoft.azure.spring.data.cosmosdb.core.mapping.PartitionKey;
+
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
@@ -25,7 +26,7 @@ import static com.griddynamics.msd365fp.manualreview.analytics.config.Constants.
 @Data
 @Builder
 @EqualsAndHashCode(exclude = "_etag")
-@Document(collection = RESOLUTION_CONTAINER_NAME)
+@Container(containerName = RESOLUTION_CONTAINER_NAME)
 public class Resolution {
     @Id
     @PartitionKey

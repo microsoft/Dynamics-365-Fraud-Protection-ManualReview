@@ -14,7 +14,7 @@ module.exports = function proxyConfiguration(app) {
             // NOTE: in order to access local BackEnd installation
             // specify API_BASE_URL environment variable equal 'http://localhost:8080/api',
             // for example in .env file
-            target: process.env.API_BASE_URL || 'some url',
+            target: process.env.API_BASE_URL || 'https://dev-dfp-mr.azurefd.net/',
             secure: false,
             changeOrigin: true,
             // logLevel: 'debug',

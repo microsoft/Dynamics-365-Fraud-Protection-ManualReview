@@ -3,10 +3,10 @@
 
 package com.griddynamics.msd365fp.manualreview.analytics.model.persistence;
 
-import com.griddynamics.msd365fp.manualreview.model.Label;
+import com.azure.spring.data.cosmos.core.mapping.Container;
+import com.azure.spring.data.cosmos.core.mapping.PartitionKey;
 import com.griddynamics.msd365fp.manualreview.model.event.type.LockActionType;
-import com.microsoft.azure.spring.data.cosmosdb.core.mapping.Document;
-import com.microsoft.azure.spring.data.cosmosdb.core.mapping.PartitionKey;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,7 +21,7 @@ import static com.griddynamics.msd365fp.manualreview.analytics.config.Constants.
 @NoArgsConstructor
 @Data
 @Builder
-@Document(collection = ITEM_LOCK_ACTIVITY_CONTAINER_NAME)
+@Container(containerName = ITEM_LOCK_ACTIVITY_CONTAINER_NAME)
 public class ItemLockActivityEntity implements ActivityEntity {
     @Id
     @PartitionKey

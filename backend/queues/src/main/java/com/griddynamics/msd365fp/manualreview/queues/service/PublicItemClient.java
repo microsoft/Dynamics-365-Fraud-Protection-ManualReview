@@ -13,7 +13,7 @@ import com.griddynamics.msd365fp.manualreview.queues.model.*;
 import com.griddynamics.msd365fp.manualreview.queues.model.persistence.Item;
 import com.griddynamics.msd365fp.manualreview.queues.model.persistence.Queue;
 import com.griddynamics.msd365fp.manualreview.queues.repository.ItemRepository;
-import com.microsoft.azure.spring.data.cosmosdb.exception.CosmosDBAccessException;
+import com.azure.spring.data.cosmos.exception.CosmosAccessException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
@@ -237,7 +237,7 @@ public class PublicItemClient {
                                 postprocessor.accept(item, context);
                                 results.put(item.getId(), new BatchUpdateResult(item.getId(), true, "Successfully updated."));
                                 log.info("Item [{}] has been modified in batch operation.", item.getId());
-                            } catch (CosmosDBAccessException e) {
+                            } catch (CosmosAccessException e) {
                                 results.put(item.getId(), new BatchUpdateResult(item.getId(), false, "Item has been modified by another process."));
                             } catch (Exception e) {
                                 log.warn("Exception during bulk operation for item [{}]: {}", item.getId(), e.getMessage());

@@ -197,7 +197,12 @@ azure:
 swagger:
   auth-url: https://login.microsoftonline.com/${CLIENT_TENANT_ID}/oauth2/authorize?resource=${CLIENT_ID}
 
+
 spring:
+  azure:
+    activedirectory:
+        client-id: ${MAP_CLIENT_ID}
+        client-secret: ${map-client-secret:${MAP_CLIENT_SECRET}}
   application:
     name: mr-queues
   security:
@@ -242,11 +247,11 @@ resilience4j.retry:
       maxRetryAttempts: 30
       waitDuration: 10ms
       retryExceptions:
-        - com.microsoft.azure.spring.data.cosmosdb.exception.CosmosDBAccessException
+        - com.microsoft.azure.spring.data.cosmosdb.exception.CosmosAccessException
         - com.azure.data.cosmos.CosmosClientException
     cosmosOptimisticUpdate:
       maxRetryAttempts: 3
       waitDuration: 100ms
       retryExceptions:
-        - com.microsoft.azure.spring.data.cosmosdb.exception.CosmosDBAccessException
+        - com.microsoft.azure.spring.data.cosmosdb.exception.CosmosAccessException
         - com.azure.data.cosmos.CosmosClientException

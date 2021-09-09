@@ -10,12 +10,12 @@ import com.griddynamics.msd365fp.manualreview.ehub.durable.model.DurableEventHub
 import com.griddynamics.msd365fp.manualreview.ehub.durable.model.HealthCheckProcessor;
 import com.griddynamics.msd365fp.manualreview.model.event.internal.*;
 import com.griddynamics.msd365fp.manualreview.model.event.type.ItemPlacementType;
-import com.microsoft.azure.spring.data.cosmosdb.exception.CosmosDBAccessException;
+import com.azure.spring.data.cosmos.exception.CosmosAccessException;
 import io.github.resilience4j.retry.annotation.Retry;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.SetUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,7 +126,7 @@ public class StreamService implements HealthCheckProcessor {
                             try {
                                 healthCheck.setCreated(OffsetDateTime.now());
                                 healthCheckRepository.save(healthCheck);
-                            } catch (CosmosDBAccessException e) {
+                            } catch (CosmosAccessException e) {
                                 log.debug("Receiver already inserted this [{}] health-check entry", healthCheck.getId());
                             }
                         }));
