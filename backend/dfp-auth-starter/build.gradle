@@ -32,12 +32,12 @@ jar {
 }
 
 dependencies {
-    compile project(path: ':model', configuration: 'default')
-    compile project(path: ':azure-graph-client', configuration: 'default')
+    implementation project(path: ':model', configuration: 'default')
+    implementation project(path: ':azure-graph-client', configuration: 'default')
 
-    implementation 'org.springframework.boot:spring-boot-starter-web:'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.6.3'
     implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'com.microsoft.azure:azure-active-directory-spring-boot-starter:2.3.2'
+    implementation 'com.azure.spring:azure-spring-boot-starter-active-directory:3.13.0'
     implementation 'com.google.guava:guava:25.0-jre'
 
     implementation 'org.springframework:spring-core'

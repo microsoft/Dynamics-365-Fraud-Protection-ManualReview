@@ -4,7 +4,7 @@
 package com.griddynamics.msd365fp.manualreview.dfpauth.util;
 
 import com.griddynamics.msd365fp.manualreview.model.Analyst;
-import com.microsoft.azure.spring.autoconfigure.aad.UserPrincipal;
+import com.azure.spring.autoconfigure.aad.UserPrincipal;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.StringUtils;

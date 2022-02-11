@@ -17,5 +17,4 @@ public class QueuesApplication {
         Schedulers.enableMetrics();
         SpringApplication.run(QueuesApplication.class, args);
     }
-
 }

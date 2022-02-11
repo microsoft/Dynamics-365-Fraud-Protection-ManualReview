@@ -32,7 +32,7 @@ jar {
 }
 
 dependencies {
-    compile project(path: ':model', configuration: 'default')
+    implementation project(path: ':model', configuration: 'default')
 
 //	  Common
     implementation 'org.springframework:spring-core'

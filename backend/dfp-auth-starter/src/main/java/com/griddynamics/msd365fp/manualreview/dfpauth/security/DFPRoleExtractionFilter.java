@@ -10,7 +10,7 @@ import com.griddynamics.msd365fp.manualreview.dfpauth.config.properties.DFPRoleE
 import com.griddynamics.msd365fp.manualreview.dfpauth.util.UserPrincipalUtility;
 import com.griddynamics.msd365fp.manualreview.model.Analyst;
 import com.griddynamics.msd365fp.manualreview.model.exception.IncorrectConfigurationException;
-import com.microsoft.azure.spring.autoconfigure.aad.UserPrincipal;
+import com.azure.spring.autoconfigure.aad.UserPrincipal;
 import com.nimbusds.jwt.JWTClaimsSet;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -101,7 +101,7 @@ public class DFPRoleExtractionFilter extends OncePerRequestFilter {
                 claimsSetBuilder.claim(entry.getKey(), entry.getValue());
             }
             claimsSetBuilder.claim(AUTH_TOKEN_PRINCIPAL_ID_CLAIM, virtualUserName);
-            UserPrincipal newPrincipal = new UserPrincipal(null, claimsSetBuilder.build());
+            UserPrincipal newPrincipal = new UserPrincipal(null, null, claimsSetBuilder.build());
             log.debug("Virtual user with ID [{}] will be used as authentication principal", virtualUserName);
             return newPrincipal;
         } catch (Exception e) {
