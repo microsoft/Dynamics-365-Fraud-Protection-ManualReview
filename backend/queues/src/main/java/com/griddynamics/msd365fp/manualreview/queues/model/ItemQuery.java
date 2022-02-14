@@ -129,6 +129,14 @@ public class ItemQuery {
                             Joiner.on("', '").join(itemFilter.getValues())
                     );
                     break;
+                case NOT_IN:
+                    condition = String.format(
+                            "%s%s NOT IN ('%s')",
+                            decomposition.getLocalAlias(),
+                            decomposition.getPath(),
+                            Joiner.on("', '").join(itemFilter.getValues())
+                    );
+                    break;
                 case CONTAINS:
                     condition = String.format(
                             "CONTAINS(%s%s, '%s')",

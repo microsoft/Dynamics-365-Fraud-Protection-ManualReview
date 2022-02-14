@@ -71,6 +71,11 @@ export enum ACCEPTABLE_CONDITIONS {
     IN = 'IN',
 
     /**
+    * String field with multiple input and suggestions list (hints)
+    */
+    NOT_IN = 'NOT_IN',
+
+    /**
      * Toggle field (checkbox)
      */
     IS_TRUE = 'IS_TRUE',
@@ -161,6 +166,7 @@ export const DISPLAY_ACCEPTABLE_CONDITIONS = {
     [ACCEPTABLE_CONDITIONS.GREATER_OR_EQUAL_DATE]: 'Greater or equal date',
 
     [ACCEPTABLE_CONDITIONS.IN]: 'In',
+    [ACCEPTABLE_CONDITIONS.NOT_IN]: 'Not in',
 
     [ACCEPTABLE_CONDITIONS.IS_TRUE]: 'Yes/No',
 

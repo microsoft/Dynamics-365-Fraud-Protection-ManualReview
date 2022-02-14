@@ -11,6 +11,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 public enum ItemDataFieldCondition implements Serializable {
     IN,
+    NOT_IN,
     CONTAINS,
     REGEXP,
     IS_TRUE,

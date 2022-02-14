@@ -8,6 +8,7 @@ import {
     DISPLAY_TILES_ACCEPTABLE_CONDITIONS_GROUPS,
     TILE_GROUPS
 } from '../../../constants';
+
 import { formatter } from './formatter-fn';
 
 export const ON_OFF_STATE_TEXT = {

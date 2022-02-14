@@ -21,6 +21,7 @@ import java.util.List;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "condition", visible = true)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = ItemFilterIn.class, name = "IN"),
+        @JsonSubTypes.Type(value = ItemFilterIn.class, name = "NOT_IN"),
         @JsonSubTypes.Type(value = ItemFilterContains.class, name = "CONTAINS"),
         @JsonSubTypes.Type(value = ItemFilterRegexp.class, name = "REGEXP"),
         @JsonSubTypes.Type(value = ItemFilterIsTrue.class, name = "IS_TRUE"),
