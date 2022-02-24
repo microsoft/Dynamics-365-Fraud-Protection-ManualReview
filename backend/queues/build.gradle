@@ -53,9 +53,11 @@ dependencies {
     implementation 'org.springframework:spring-webflux'
 
 //    Azure
-    implementation 'com.microsoft.azure:azure-spring-boot-starter:2.3.2'
-    implementation 'com.microsoft.azure:azure-cosmosdb-spring-boot-starter:2.3.2'
-    implementation 'com.microsoft.azure:azure-keyvault-secrets-spring-boot-starter:2.3.2'
+    implementation 'com.azure.spring:azure-spring-boot:3.13.0'
+    // https://mvnrepository.com/artifact/com.azure.spring/azure-spring-boot-starter-cosmos
+    implementation 'com.azure.spring:azure-spring-boot-starter-cosmos:3.13.0'
+    implementation 'com.azure.spring:azure-spring-boot-starter-keyvault-secrets:3.13.0'
+
 
 //    OpenAPI
     implementation 'org.springdoc:springdoc-openapi-ui:1.3.9'
