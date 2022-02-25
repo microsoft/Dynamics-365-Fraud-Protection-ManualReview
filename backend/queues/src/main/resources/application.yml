@@ -235,6 +235,9 @@ spring:
             token-uri: https://login.microsoftonline.com/${CLIENT_TENANT_ID}/oauth2/v2.0/token
   aop:
     proxyTargetClass: true
+  main:
+    allow-bean-definition-overriding: true
+
 
 resilience4j.retry:
   instances:
