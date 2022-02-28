@@ -3,8 +3,9 @@
 
 package com.griddynamics.msd365fp.manualreview.cosmos.utilities;
 
-import com.azure.data.cosmos.*;
+import com.azure.cosmos.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

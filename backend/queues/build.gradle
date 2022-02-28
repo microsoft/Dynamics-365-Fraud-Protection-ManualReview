@@ -3,7 +3,7 @@
 
 plugins {
     id 'io.freefair.lombok' version '5.1.1'
-    id 'org.springframework.boot' version '2.4.0'
+    id 'org.springframework.boot' version '2.3.5.RELEASE'
     id 'io.spring.dependency-management' version '1.0.10.RELEASE'
     id 'java'
     id 'com.github.jk1.dependency-license-report' version '1.13'
@@ -55,10 +55,10 @@ dependencies {
 
 //    Azure
     // https://mvnrepository.com/artifact/com.azure.spring/azure-spring-boot-starter
-    implementation 'com.azure.spring:azure-spring-boot-starter:3.13.0'
+    implementation 'com.azure.spring:azure-spring-boot-starter:3.4.0'
     // https://mvnrepository.com/artifact/com.azure.spring/azure-spring-boot-starter-cosmos
-    implementation 'com.azure.spring:azure-spring-boot-starter-cosmos:3.13.0'
-    implementation 'com.azure.spring:azure-spring-boot-starter-keyvault-secrets:3.13.0'
+    implementation 'com.azure.spring:azure-spring-boot-starter-cosmos:3.4.0'
+    implementation 'com.azure.spring:azure-spring-boot-starter-keyvault-secrets:3.4.0'
 
 
 //    OpenAPI

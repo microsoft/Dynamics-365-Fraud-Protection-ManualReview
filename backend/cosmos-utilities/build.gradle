@@ -3,7 +3,7 @@
 
 plugins {
     id 'io.freefair.lombok' version '5.1.1'
-    id 'org.springframework.boot' version '2.3.3.RELEASE'
+    id 'org.springframework.boot' version '2.3.5.RELEASE'
     id 'io.spring.dependency-management' version '1.0.10.RELEASE'
     id 'java-library'
 }
@@ -33,6 +33,5 @@ jar {
 
 dependencies {
     compile project(path: ':model', configuration: 'default')
-
-    implementation 'com.microsoft.azure:spring-data-cosmosdb:2.3.0'
+    implementation 'com.azure:azure-spring-data-cosmos:3.4.0'
 }
