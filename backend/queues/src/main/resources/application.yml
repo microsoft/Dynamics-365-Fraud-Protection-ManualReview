@@ -95,7 +95,6 @@ mr:
 logging:
   level:
     com:
-      microsoft:
         azure:
           spring:
             autoconfigure:
@@ -235,8 +234,6 @@ spring:
             token-uri: https://login.microsoftonline.com/${CLIENT_TENANT_ID}/oauth2/v2.0/token
   aop:
     proxyTargetClass: true
-  main:
-    allow-bean-definition-overriding: true
 
 
 resilience4j.retry:
@@ -245,11 +242,11 @@ resilience4j.retry:
       maxRetryAttempts: 30
       waitDuration: 10ms
       retryExceptions:
-        - com.microsoft.azure.spring.data.cosmosdb.exception.CosmosDBAccessException
+        - com.azure.spring.data.cosmos.exception.CosmosAccessException
         - com.azure.data.cosmos.CosmosClientException
     cosmosOptimisticUpdate:
       maxRetryAttempts: 3
       waitDuration: 100ms
       retryExceptions:
-        - com.microsoft.azure.spring.data.cosmosdb.exception.CosmosDBAccessException
+        - com.azure.spring.data.cosmos.exception.CosmosAccessException
         - com.azure.data.cosmos.CosmosClientException

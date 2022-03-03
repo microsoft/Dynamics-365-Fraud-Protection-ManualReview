@@ -37,7 +37,7 @@ public class ResolutionRepositoryImpl implements ResolutionRepositoryCustomMetho
                 continuationToken);
         return new PageableCollection<>(
                 res.getContent()
-                        .map(cip -> Optional.ofNullable(cip.getString("id")))
+                        .map(cip -> Optional.ofNullable(cip.get("id").asText()))
                         .filter(Optional::isPresent)
                         .map(Optional::get)
                         .collect(Collectors.toSet()),

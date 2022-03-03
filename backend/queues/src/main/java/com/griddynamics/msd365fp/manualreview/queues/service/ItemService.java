@@ -24,7 +24,7 @@ import com.griddynamics.msd365fp.manualreview.queues.model.persistence.SearchQue
 import com.griddynamics.msd365fp.manualreview.queues.repository.ItemRepository;
 import com.griddynamics.msd365fp.manualreview.queues.repository.QueueRepository;
 import com.griddynamics.msd365fp.manualreview.queues.repository.SearchQueryRepository;
-import com.microsoft.azure.spring.data.cosmosdb.exception.CosmosDBAccessException;
+import com.azure.spring.data.cosmos.exception.CosmosAccessException;
 import io.github.resilience4j.retry.annotation.Retry;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -82,7 +82,7 @@ public class ItemService {
                 try {
                     itemRepository.save(item);
                     log.info("Item [{}] has been saved to the storage.", itemId);
-                } catch (CosmosDBAccessException e) {
+                } catch (CosmosAccessException e) {
                     log.info("Item [{}] has not been saved to the storage because it's already exist.", itemId);
                 } catch (Exception e) {
                     log.warn("Item [{}] has not been saved to the storage: {}", itemId, e.getMessage());

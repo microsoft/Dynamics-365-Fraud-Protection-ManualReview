@@ -3,7 +3,7 @@
 
 plugins {
     id 'io.freefair.lombok' version '5.1.1'
-    id 'org.springframework.boot' version '2.3.5.RELEASE'
+    id 'org.springframework.boot' version '2.4.3'
     id 'io.spring.dependency-management' version '1.0.10.RELEASE'
     id 'java'
     id 'com.github.jk1.dependency-license-report' version '1.13'
@@ -28,7 +28,7 @@ repositories {
 }
 
 ext {
-    set('azureVersion', '2.3.2')
+    set('azureVersion', '3.4')
     set('appInsightsVersion', '2.6.1')
 }
 
@@ -53,15 +53,16 @@ dependencies {
     implementation 'org.springdoc:springdoc-openapi-webmvc-core:1.3.9'
 
 //    Azure
-    implementation 'com.microsoft.azure:azure-spring-boot-starter:2.3.2'
-    implementation 'com.microsoft.azure:azure-cosmosdb-spring-boot-starter:2.3.2'
-    implementation 'com.microsoft.azure:azure-keyvault-secrets-spring-boot-starter:2.3.2'
+    implementation 'com.azure.spring:azure-spring-boot-starter:3.4.0'
+    implementation 'com.azure.spring:azure-spring-boot-starter-cosmos:3.4.0'
+    implementation 'com.azure.spring:azure-spring-boot-starter-keyvault-secrets:3.4.0'
 
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
     testImplementation 'org.mockito:mockito-junit-jupiter:2.23.0'
     testImplementation 'org.springframework.security:spring-security-test'
+    implementation 'org.apache.commons:commons-collections4:4.4'
 }
 
 test {

@@ -15,7 +15,7 @@ import com.griddynamics.msd365fp.manualreview.queues.model.dto.LabelDTO;
 import com.griddynamics.msd365fp.manualreview.queues.model.persistence.Item;
 import com.griddynamics.msd365fp.manualreview.queues.model.persistence.Queue;
 import com.griddynamics.msd365fp.manualreview.queues.util.QueueViewUtility;
-import com.microsoft.azure.spring.autoconfigure.aad.UserPrincipal;
+import com.azure.spring.autoconfigure.aad.UserPrincipal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

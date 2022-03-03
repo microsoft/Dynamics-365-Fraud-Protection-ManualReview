@@ -3,8 +3,10 @@
 
 package com.griddynamics.msd365fp.manualreview.queues.controller;
 
-import com.azure.data.cosmos.CosmosClient;
-import com.azure.data.cosmos.CosmosContainer;
+import com.azure.cosmos.CosmosClient;
+import com.azure.cosmos.CosmosContainer;
+import com.azure.cosmos.models.CosmosItemRequestOptions;
+import com.azure.cosmos.models.PartitionKey;
 import com.azure.messaging.eventhubs.EventData;
 import com.azure.messaging.eventhubs.EventHubClientBuilder;
 import com.azure.messaging.eventhubs.EventHubProducerAsyncClient;
@@ -198,7 +200,7 @@ public class TestingController {
                             continuation);
                     return new PageableCollection<>(
                             res.getContent()
-                                    .map(cip -> cip.getString("string"))
+                                    .map(cip -> cip.asText())
                                     .collect(Collectors.toSet()),
                             res.getContinuationToken());
                 },
@@ -213,9 +215,7 @@ public class TestingController {
                         .collect(Collectors.toSet())
                         .forEach(str -> {
                             try {
-                                container.upsertItem(mapper.readValue(str, Map.class))
-                                        .subscribeOn(Schedulers.elastic())
-                                        .subscribe();
+                                container.upsertItem(mapper.readValue(str, Map.class));
                             } catch (JsonProcessingException e) {
                                 log.error("Can't parse [{}]", str);
                                 throw new RuntimeException("Can't parse");
@@ -296,7 +296,7 @@ public class TestingController {
         CosmosContainer container = cosmosClient.getDatabase(dbName).getContainer(containerName);
         List<String> toDelete = ids.stream().map(mp -> mp.get("id")).collect(Collectors.toList());
         toDelete.forEach(id ->
-                container.getItem(id, id).delete().block());
+                container.deleteItem(id, new PartitionKey(id),new CosmosItemRequestOptions()));
         log.warn("User [{}] has deleted items [{}].", UserPrincipalUtility.extractUserId(principal), toDelete);
     }
 

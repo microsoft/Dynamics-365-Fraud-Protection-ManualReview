@@ -559,7 +559,7 @@ public class ItemQuery {
                     throw e;
                 }
                 Optional<Integer> optionalCount = res.getContent()
-                        .map(cip -> (int) cip.get("_aggregate"))
+                        .map(cip -> (int) cip.get("_aggregate").asInt())
                         .findFirst();
                 return optionalCount.orElse(0);
             };
@@ -571,7 +571,7 @@ public class ItemQuery {
                 String query = constructSample(field);
                 try {
                     return itemsContainer.runCrossPartitionQuery(query)
-                            .map(cip -> cip.getString("val"))
+                            .map(cip -> cip.get("val").asText())
                             .collect(Collectors.toSet());
                 } catch (Exception e) {
                     log.error("Constructed query execution ended with error. Query: [{}]", query);

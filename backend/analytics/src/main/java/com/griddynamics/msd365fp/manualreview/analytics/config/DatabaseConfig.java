@@ -3,8 +3,8 @@
 
 package com.griddynamics.msd365fp.manualreview.analytics.config;
 
-import com.azure.data.cosmos.CosmosClient;
-import com.azure.data.cosmos.CosmosDatabase;
+import com.azure.cosmos.CosmosClient;
+import com.azure.cosmos.CosmosDatabase;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.griddynamics.msd365fp.manualreview.cosmos.utilities.ExtendedCosmosContainer;
 import lombok.RequiredArgsConstructor;

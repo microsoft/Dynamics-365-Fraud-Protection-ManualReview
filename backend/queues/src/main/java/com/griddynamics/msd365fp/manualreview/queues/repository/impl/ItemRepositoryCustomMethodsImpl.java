@@ -3,7 +3,7 @@
 
 package com.griddynamics.msd365fp.manualreview.queues.repository.impl;
 
-import com.azure.data.cosmos.CosmosItemProperties;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.griddynamics.msd365fp.manualreview.cosmos.utilities.ExtendedCosmosContainer;
 import com.griddynamics.msd365fp.manualreview.model.Label;
 import com.griddynamics.msd365fp.manualreview.model.PageableCollection;
@@ -54,8 +54,8 @@ public class ItemRepositoryCustomMethodsImpl implements ItemRepositoryCustomMeth
                         String.join("','", queueIds),
                         viewType.getQueryCondition()))
                 .forEach(cip ->
-                        result.compute(cip.getString("qid"), (key, val) -> {
-                            int cnt = cip.getInt("cnt");
+                        result.compute(cip.get("qid").asText(), (key, val) -> {
+                            int cnt = cip.get("cnt").asInt();
                             if (val == null) return cnt;
                             else return val + cnt;
                         }));
@@ -164,7 +164,7 @@ public class ItemRepositoryCustomMethodsImpl implements ItemRepositoryCustomMeth
                 size,
                 continuationToken);
         List<String> queriedItems = res.getContent()
-                .map(cip -> Optional.ofNullable((String) cip.get("id")))
+                .map(cip -> Optional.ofNullable((String) cip.get("id").asText()))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());
@@ -195,7 +195,7 @@ public class ItemRepositoryCustomMethodsImpl implements ItemRepositoryCustomMeth
                 size,
                 continuationToken);
         List<String> queriedItems = res.getContent()
-                .map(cip -> Optional.ofNullable((String) cip.get("id")))
+                .map(cip -> Optional.ofNullable((String) cip.get("id").asText()))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());
@@ -216,7 +216,7 @@ public class ItemRepositoryCustomMethodsImpl implements ItemRepositoryCustomMeth
                 size,
                 continuationToken);
         List<BasicItemInfo> queriedItems = res.getContent()
-                .map(cip -> itemsContainer.castCosmosObjectToClassInstance(cip.toJson(), Item.class))
+                .map(cip -> itemsContainer.castCosmosObjectToClassInstance(cip, Item.class))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());
@@ -348,9 +348,9 @@ public class ItemRepositoryCustomMethodsImpl implements ItemRepositoryCustomMeth
                 "(SELECT COUNT(1) as count, i.lock.queueId FROM i \n" +
                 "WHERE i.lock.queueId IN ('" + String.join("','", queueIds) + "') " +
                 "GROUP BY i.lock.queueId) as root";
-        Stream<CosmosItemProperties> res = itemsContainer.runCrossPartitionQuery(query);
+        Stream<JsonNode> res = itemsContainer.runCrossPartitionQuery(query);
         return res
-                .map(cip -> Collections.singletonMap(cip.getString("queueId"), cip.getLong("count")))
+                .map(cip -> Collections.singletonMap(cip.get("queueId").asText(), cip.get("count").asLong()))
                 .flatMap(m -> m.entrySet().stream())
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
@@ -430,7 +430,7 @@ public class ItemRepositoryCustomMethodsImpl implements ItemRepositoryCustomMeth
                                 String.format("AND ARRAY_CONTAINS(c.queueIds, '%1$s')", queueId)
                 )
         )
-                .map(cip -> itemsContainer.castCosmosObjectToClassInstance(cip.toJson(), Bucket.class))
+                .map(cip -> itemsContainer.castCosmosObjectToClassInstance(cip, Bucket.class))
                 .filter(Optional::isPresent)
                 .map(Optional::get);
     }

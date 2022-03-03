@@ -4,7 +4,7 @@
 package com.griddynamics.msd365fp.manualreview.analytics.config;
 
 import com.griddynamics.msd365fp.manualreview.dfpauth.security.DFPRoleExtractionFilter;
-import com.microsoft.azure.spring.autoconfigure.aad.AADAppRoleStatelessAuthenticationFilter;
+import com.azure.spring.autoconfigure.aad.AADAppRoleStatelessAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;

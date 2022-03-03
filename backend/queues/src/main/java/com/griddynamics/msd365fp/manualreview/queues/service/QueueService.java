@@ -13,7 +13,7 @@ import com.griddynamics.msd365fp.manualreview.queues.model.persistence.Queue;
 import com.griddynamics.msd365fp.manualreview.queues.repository.ItemRepository;
 import com.griddynamics.msd365fp.manualreview.queues.repository.QueueRepository;
 import com.griddynamics.msd365fp.manualreview.queues.util.QueueViewUtility;
-import com.microsoft.azure.spring.data.cosmosdb.exception.CosmosDBAccessException;
+import com.azure.spring.data.cosmos.exception.CosmosAccessException;
 import io.github.resilience4j.retry.annotation.Retry;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -164,7 +164,7 @@ public class QueueService {
                         Queue updatedQueue = queueRepository.save(queue);
                         streamService.sendQueueSizeEvent(updatedQueue);
                         return Stream.of(queue);
-                    } catch (CosmosDBAccessException e) {
+                    } catch (CosmosAccessException e) {
                         log.warn("Size of the queue [{}] has not been updated due to optimistic lock conflict.",
                                 queue.getId());
                         return Stream.empty();

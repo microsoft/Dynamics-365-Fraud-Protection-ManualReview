@@ -12,12 +12,12 @@ import com.griddynamics.msd365fp.manualreview.model.dfp.raw.*;
 import com.griddynamics.msd365fp.manualreview.model.exception.BusyException;
 import com.griddynamics.msd365fp.manualreview.queues.model.persistence.Item;
 import com.griddynamics.msd365fp.manualreview.queues.repository.ItemRepository;
-import com.microsoft.azure.spring.data.cosmosdb.exception.CosmosDBAccessException;
+import com.azure.spring.data.cosmos.exception.CosmosAccessException;
 import io.github.resilience4j.retry.annotation.Retry;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.gavaghan.geodesy.Ellipsoid;
 import org.gavaghan.geodesy.GeodeticCalculator;
 import org.gavaghan.geodesy.GeodeticCurve;
@@ -178,7 +178,7 @@ public class ItemEnrichmentService {
                 streamService.sendItemAssignmentEvent(item);
             }
             log.info("Item [{}] has been successfully enriched in the database.", item.getId());
-        } catch (CosmosDBAccessException ignored) {
+        } catch (CosmosAccessException ignored) {
             // ignored because it will be consumed by retry mechanism
             log.info("Optimistic lock exception during enrichment of [{}].", itemId);
         } catch (Exception e) {

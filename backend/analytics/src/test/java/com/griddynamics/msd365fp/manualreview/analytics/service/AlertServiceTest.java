@@ -19,7 +19,7 @@ import com.griddynamics.msd365fp.manualreview.analytics.service.dashboard.Public
 import com.griddynamics.msd365fp.manualreview.azuregraph.client.AnalystClient;
 import com.griddynamics.msd365fp.manualreview.model.Analyst;
 import com.griddynamics.msd365fp.manualreview.model.exception.NotFoundException;
-import com.microsoft.azure.spring.autoconfigure.aad.UserPrincipal;
+import com.azure.spring.autoconfigure.aad.UserPrincipal;
 import org.assertj.core.util.Maps;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;

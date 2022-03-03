@@ -3,7 +3,7 @@
 
 plugins {
     id 'io.freefair.lombok' version '5.1.1'
-    id 'org.springframework.boot' version '2.3.5.RELEASE'
+    id 'org.springframework.boot' version '2.4.3'
     id 'io.spring.dependency-management' version '1.0.10.RELEASE'
     id 'java'
     id 'com.github.jk1.dependency-license-report' version '1.13'
@@ -54,9 +54,7 @@ dependencies {
     implementation 'org.springframework:spring-webflux'
 
 //    Azure
-    // https://mvnrepository.com/artifact/com.azure.spring/azure-spring-boot-starter
     implementation 'com.azure.spring:azure-spring-boot-starter:3.4.0'
-    // https://mvnrepository.com/artifact/com.azure.spring/azure-spring-boot-starter-cosmos
     implementation 'com.azure.spring:azure-spring-boot-starter-cosmos:3.4.0'
     implementation 'com.azure.spring:azure-spring-boot-starter-keyvault-secrets:3.4.0'
 
@@ -79,6 +77,8 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
     testImplementation 'org.springframework.security:spring-security-test'
+    implementation 'org.apache.commons:commons-collections4:4.4'
+    implementation 'com.azure:azure-spring-data-cosmos:3.4.0'
 }
 
 test {
@@ -87,7 +87,7 @@ test {
 
 bootRun {
     // Allows Intellij IDEA run configuration to pass system properties to the
-    // application using `./graldew bootRun` command.
+    // application using `./gradlew bootRun` command.
     systemProperties = System.properties
 }
 

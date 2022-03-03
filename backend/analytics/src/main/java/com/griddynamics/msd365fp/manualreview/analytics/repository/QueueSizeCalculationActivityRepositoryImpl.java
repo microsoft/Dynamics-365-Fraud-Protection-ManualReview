@@ -50,7 +50,7 @@ public class QueueSizeCalculationActivityRepositoryImpl implements QueueSizeCalc
                         aggregation.getSeconds(),
                         CollectionUtils.isEmpty(queueIds) ? "" :
                                 String.format("AND c.queueId IN ('%1$s') ", String.join("','", queueIds))))
-                .map(cip -> queueSizeCalculationActivityContainer.castCosmosObjectToClassInstance(cip.toJson(), SizeHistoryBucket.class))
+                .map(cip -> queueSizeCalculationActivityContainer.castCosmosObjectToClassInstance(cip, SizeHistoryBucket.class))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());

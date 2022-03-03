@@ -4,6 +4,8 @@
 package com.griddynamics.msd365fp.manualreview.cosmos.utilities;
 
 import com.azure.cosmos.*;
+import com.azure.cosmos.models.*;
+import com.azure.cosmos.util.CosmosPagedIterable;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,20 +34,18 @@ public class ExtendedCosmosContainer {
     private final ObjectMapper jsonMapper;
 
 
-    public Stream<CosmosItemProperties> runCrossPartitionQuery(final String query) {
+
+    public Stream<JsonNode> runCrossPartitionQuery(final String query) {
         log.debug("Executing cross partition query: [{}]", query);
-        final FeedOptions feedOptions = new FeedOptions();
-        feedOptions.enableCrossPartitionQuery(true);
-        Flux<FeedResponse<CosmosItemProperties>> feedResponseFlux =
-                container.queryItems(query, feedOptions);
-        return feedResponseFlux.subscribeOn(Schedulers.parallel())
-                .map(FeedResponse::results)
+        final CosmosQueryRequestOptions options = new CosmosQueryRequestOptions();
+        CosmosPagedIterable<JsonNode> pagedIterable =
+                container.queryItems(query, options, JsonNode.class);
+
+        return Flux.fromIterable(pagedIterable).subscribeOn(Schedulers.parallel())
                 .collect(Collectors.toList())
                 .blockOptional()
                 .orElseThrow()
-                .stream()
-                .flatMap(List::stream);
-
+                .stream();
     }
 
     public Page runCrossPartitionPageableQuery(final String query,
@@ -53,34 +53,31 @@ public class ExtendedCosmosContainer {
                                                final String continuationToken) {
         log.debug("Executing pageable query with size [{}] and continuation token [{}]: [{}]",
                 size, continuationToken, query);
-        final FeedOptions feedOptions = new FeedOptions();
-        feedOptions.enableCrossPartitionQuery(true);
-        feedOptions.maxItemCount(size);
-        if (continuationToken != null) {
-            feedOptions.requestContinuation(continuationToken);
-        }
-        Flux<FeedResponse<CosmosItemProperties>> feedResponseFlux =
-                container.queryItems(query, feedOptions);
-        FeedResponse<CosmosItemProperties> res = feedResponseFlux.blockFirst(Duration.ofSeconds(DEFAULT_COSMOS_TIMEOUT_SEC));
+
+        CosmosQueryRequestOptions options = new CosmosQueryRequestOptions();
+        Iterable<FeedResponse<JsonNode>> pagedIterable =
+                container.queryItems(query, options, JsonNode.class).iterableByPage(continuationToken,size);
+
+        FeedResponse<JsonNode> res = Flux.fromIterable(pagedIterable).blockFirst(Duration.ofSeconds(DEFAULT_COSMOS_TIMEOUT_SEC));
+
         return new Page(
-                Objects.requireNonNull(res).results().stream(),
-                res.responseHeaders().get("x-ms-continuation"));
+               Objects.requireNonNull(res).getResults().stream(),
+                res.getResponseHeaders().get("x-ms-continuation"));
 
     }
 
-    public Stream<CosmosItemProperties> runPartitionQuery(final String query, final String partitionId) {
-        final FeedOptions feedOptions = new FeedOptions();
-        feedOptions.enableCrossPartitionQuery(false);
-        feedOptions.partitionKey(new PartitionKey(partitionId));
-        Flux<FeedResponse<CosmosItemProperties>> feedResponseFlux =
-                container.queryItems(query, feedOptions);
-        return feedResponseFlux.subscribeOn(Schedulers.parallel())
-                .map(FeedResponse::results)
+    public Stream<JsonNode> runPartitionQuery(final String query, final String partitionId) {
+        final CosmosQueryRequestOptions options = new CosmosQueryRequestOptions();
+        options.setPartitionKey(new PartitionKey(partitionId));
+
+        CosmosPagedIterable<JsonNode> pagedIterable =
+                container.queryItems(query, options, JsonNode.class);
+
+        return Flux.fromIterable(pagedIterable).subscribeOn(Schedulers.parallel())
                 .collect(Collectors.toList())
                 .blockOptional()
                 .orElseThrow()
-                .stream()
-                .flatMap(List::stream);
+                .stream();
     }
 
     public <T> Optional<T> castCosmosObjectToClassInstance(final Object object, final Class<T> klass) {
@@ -97,7 +94,7 @@ public class ExtendedCosmosContainer {
     @NoArgsConstructor
     @Getter
     public static class Page {
-        Stream<CosmosItemProperties> content = Stream.empty();
+        Stream<JsonNode> content = Stream.empty();
         String continuationToken = null;
     }
 
