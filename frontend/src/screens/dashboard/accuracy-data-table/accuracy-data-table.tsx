@@ -34,6 +34,12 @@ interface DataGridListProps<T> {
 
 @observer
 export class AccuracyDataTable<T extends BasicEntityPerformance> extends Component<DataGridListProps<T>, never> {
+    static defaultProps = {
+        onRowClick: undefined,
+        isAnalystTable: false,
+        className: ''
+    };
+
     private readonly columns: IColumn[] = [
         {
             // eslint-disable-next-line react/destructuring-assignment

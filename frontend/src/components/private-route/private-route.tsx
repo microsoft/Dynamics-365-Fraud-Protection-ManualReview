@@ -15,7 +15,7 @@ import { AuthenticationService } from '../../utility-services';
 import { CurrentUserStore } from '../../view-services';
 
 export interface PrivateRouteProps extends RouteProps{
-    accessPermission?: PERMISSION
+    accessPermission: PERMISSION
 }
 
 /* eslint-disable react/jsx-props-no-spreading */

@@ -25,6 +25,10 @@ const CN = 'queue-item-tags';
 
 @observer
 export class QueueItemTags extends Component<QueueItemTagProps, never> {
+    static defaultProps = {
+        className: ''
+    };
+
     @resolve(TYPES.QUEUES_SCREEN_STORE)
     private queuesScreenStore!: QueuesScreenStore;
 

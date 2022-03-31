@@ -11,12 +11,19 @@ import './blur-loader.scss';
 interface BlueLoaderProps {
     isLoading: boolean
     spinnerProps?: ISpinnerProps
-    className?: string
+    className?: string,
+    children?: any
 }
 
 const CN = 'blur-loader';
 
 export class BlurLoader extends React.Component<BlueLoaderProps, never> {
+    static defaultProps = {
+        children: undefined,
+        spinnerProps: undefined,
+        className: ''
+    };
+
     renderSpinner() {
         const { spinnerProps } = this.props;
 

@@ -26,6 +26,13 @@ interface UserPickerProps {
 
 @observer
 export class UserPicker extends Component<UserPickerProps, never> {
+    static defaultProps = {
+        label: null,
+        placeholder: null,
+        itemLimit: 1,
+        className: ''
+    };
+
     @autobind
     handleSelectionChange(users?: IPersonaProps[]) {
         const { onSelectionChange } = this.props;

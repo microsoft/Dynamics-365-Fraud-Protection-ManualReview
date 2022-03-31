@@ -27,6 +27,11 @@ const CN = 'filter-context-menu';
 
 @observer
 export class FilterContextMenu extends Component<FilterMenuComponentProps, never> {
+    static defaultProps = {
+        buttonText: null,
+        className: ''
+    };
+
     render() {
         const { buttonText, items, className } = this.props;
 

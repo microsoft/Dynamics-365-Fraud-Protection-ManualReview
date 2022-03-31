@@ -64,6 +64,14 @@ interface DashboardHeaderProps {
 
 @observer
 export class DashboardHeader extends Component<DashboardHeaderProps, never> {
+    static defaultProps = {
+        isSearchBarDisplayed: false,
+        onQueueSearchChange: undefined,
+        onAnalystSearchChange: undefined,
+        onGoBackClick: undefined,
+        renderSearchBar: false
+    };
+
     private maxDate: Date = new Date();
 
     @resolve(TYPES.HISTORY)

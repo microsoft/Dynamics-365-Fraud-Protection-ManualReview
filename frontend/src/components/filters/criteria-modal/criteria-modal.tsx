@@ -48,6 +48,10 @@ const CRITERIA_MODAL_STATE = {
 
 @observer
 export class CriteriaModal extends Component<CriteriaModalComponentProps, never> {
+    static defaultProps = {
+        filterStore: null
+    };
+
     getAddButtonText() {
         const { filter } = this.props;
 

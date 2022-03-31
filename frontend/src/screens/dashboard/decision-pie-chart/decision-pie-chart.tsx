@@ -13,7 +13,7 @@ import { DecisionPieDatum } from '../../../models/dashboard';
 import './decision-pie-chart.scss';
 
 interface DecisionPieChartComponentProps {
-    className?: string;
+    className: string;
     data: DecisionPieDatum[];
     isDataLoading: boolean;
 }

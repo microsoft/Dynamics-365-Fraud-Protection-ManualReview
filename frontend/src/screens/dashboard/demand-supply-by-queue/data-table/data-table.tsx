@@ -31,6 +31,10 @@ interface DataTableProps<T extends Item> {
 const CN = 'data-table';
 
 export class DataTable<T extends Item> extends React.Component<DataTableProps<T>, never> {
+    static defaultProps = {
+        isDataLoading: false
+    };
+
     private readonly columns: IColumn[] = [
         {
             key: 'fraud-score',

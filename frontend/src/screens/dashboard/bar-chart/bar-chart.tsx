@@ -99,6 +99,14 @@ interface BarChartProps extends BarSvgProps {
 const CN = 'bar-chart';
 
 export class BarChart extends React.Component<BarChartProps, never> {
+    static defaultProps = {
+        isDataLoading: false,
+        noSelectedItemsWarningMessage: undefined,
+        noDataWarningMessage: undefined,
+        hasSelectedItems: false,
+        hasData: false
+    };
+
     static getLabels() {
         const good = OVERTURNED_DECISIONS_DISPLAY_NAMES[OVERTURN_CHART_KEYS.GOOD];
         const overturnedGood = OVERTURNED_DECISIONS_DISPLAY_NAMES[OVERTURN_CHART_KEYS.OVERTURNED_GOOD];

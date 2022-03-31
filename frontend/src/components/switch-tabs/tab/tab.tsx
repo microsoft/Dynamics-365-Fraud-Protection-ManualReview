@@ -22,6 +22,11 @@ const CN = 'tab';
 
 @autobind
 export class Tab<T> extends Component<TabsProps<T>, never> {
+    static defaultProps = {
+        button: false,
+        className: ''
+    };
+
     handleClick() {
         const { onClick, label } = this.props;
         onClick(label);

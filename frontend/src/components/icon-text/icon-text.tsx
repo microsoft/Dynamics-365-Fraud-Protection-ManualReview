@@ -38,6 +38,12 @@ interface IconTextProps {
 }
 
 export class IconText extends Component<IconTextProps, never> {
+    static defaultProps = {
+        text: null,
+        className: '',
+        title: ''
+    };
+
     renderIconWithTooltip(value: any, icons: Icons) {
         const tooltipId = `${Math.random()}`;
 

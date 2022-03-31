@@ -18,6 +18,12 @@ interface AlertEditFormPartProps {
 
 @observer
 export class AlertEditFormPart extends Component<AlertEditFormPartProps, never> {
+    static defaultProps = {
+        title: null,
+        contentClassName: '',
+        className: ''
+    };
+
     render() {
         const {
             title,

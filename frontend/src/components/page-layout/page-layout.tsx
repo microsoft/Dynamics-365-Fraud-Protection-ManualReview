@@ -42,6 +42,13 @@ const CN = 'page-layout';
 
 @observer
 export class PageLayout extends Component<PageLayoutProps, never> {
+    static defaultProps = {
+        styles: null,
+        title: null,
+        withHeader: false,
+        showLockedOrders: false
+    };
+
     @resolve(TYPES.CURRENT_USER_STORE)
     private userStore!: CurrentUserStore;
 

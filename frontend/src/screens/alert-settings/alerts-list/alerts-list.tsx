@@ -36,6 +36,10 @@ interface AlertsListProps {
 
 @observer
 export class AlertsList extends Component<AlertsListProps, never> {
+    static defaultProps = {
+        className: ''
+    };
+
     @resolve(TYPES.HISTORY)
     private history!: History;
 

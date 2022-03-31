@@ -69,6 +69,19 @@ interface LineChartProps extends LineSvgProps {
 
 @autoBind
 export class LineChart extends Component<LineChartProps, never> {
+    static defaultProps = {
+        chartClassName: undefined,
+        noSelectedItemsWarningMessage: undefined,
+        noDataWarningMessage: undefined,
+        hasSelectedItems: false,
+        hasData: false,
+        isLoading: false,
+        analystChart: false,
+        maxYTicksValue: 100,
+        maxTicksValuesCount: 100,
+        showPercentage: false
+    };
+
     /**
      * Specify values to use for vertical grid lines
      *

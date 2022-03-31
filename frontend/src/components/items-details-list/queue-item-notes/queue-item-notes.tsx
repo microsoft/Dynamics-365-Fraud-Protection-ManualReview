@@ -28,6 +28,10 @@ const CN = 'queue-item-notes';
 
 @observer
 export class QueueItemNote extends Component<QueueItemNoteProps, never> {
+    static defaultProps = {
+        className: ''
+    };
+
     @resolve(TYPES.QUEUES_SCREEN_STORE)
     private queuesScreenStore!: QueuesScreenStore;
 

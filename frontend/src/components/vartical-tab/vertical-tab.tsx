@@ -20,6 +20,11 @@ export interface VerticalTabProps {
 
 @autobind
 export class VerticalTab extends Component<VerticalTabProps, never> {
+    static defaultProps = {
+        disabled: false,
+        className: ''
+    };
+
     handleClick() {
         const { onClick, tabKey } = this.props;
         onClick(tabKey);

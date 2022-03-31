@@ -61,6 +61,15 @@ const HIGH_RISK_DAYS_COUNT = 2;
 
 @observer
 export class ItemsDetailsList extends Component<ItemsDetailsListProps, never> {
+    static defaultProps = {
+        searchId: null,
+        sortingObject: undefined,
+        selectedQueue: null,
+        loadingMessage: null,
+        noItemsMessage: null,
+        className: ''
+    };
+
     @resolve(TYPES.CURRENT_USER_STORE)
     private user!: CurrentUserStore;
 

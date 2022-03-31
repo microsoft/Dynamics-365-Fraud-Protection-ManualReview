@@ -27,6 +27,10 @@ export interface HeaderProps {
 
 @observer
 export class Header extends Component<HeaderProps, never> {
+    static defaultProps = {
+        title: null,
+    };
+
     @resolve(TYPES.CURRENT_USER_STORE)
     private userStore!: CurrentUserStore;
 

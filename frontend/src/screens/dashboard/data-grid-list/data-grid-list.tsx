@@ -35,6 +35,13 @@ interface DataGridListProps<T> {
 
 @observer
 export class DataGridList<T extends BasicEntityPerformance> extends Component<DataGridListProps<T>, never> {
+    static defaultProps = {
+        isAnalystTable: false,
+        layoutMode: undefined,
+        className: '',
+        onRowClick: undefined
+    };
+
     @observable
     protected csvReportBuilder = new CSVReportBuilder();
 

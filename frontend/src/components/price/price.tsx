@@ -13,6 +13,13 @@ interface PriceProps {
 }
 
 export class Price extends Component<PriceProps, never> {
+    static defaultProps = {
+        currencySign: null,
+        digitsAmount: 0,
+        signAsSuffix: false,
+        className: ''
+    };
+
     getPriceString() {
         const {
             value,

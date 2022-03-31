@@ -31,6 +31,14 @@ interface DataGridListProps<T> {
 
 @observer
 export class DataTableCompact<T extends BasicEntityPerformance> extends Component<DataGridListProps<T>, never> {
+    static defaultProps = {
+        isAnalystTable: false,
+        layoutMode: undefined,
+        className: '',
+        onRowClick: undefined,
+        hideArrow: false
+    };
+
     private readonly columns: IColumn[] = [
         {
             // eslint-disable-next-line react/destructuring-assignment

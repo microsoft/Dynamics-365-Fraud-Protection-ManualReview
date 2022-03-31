@@ -26,6 +26,13 @@ interface UniqueTagPickerProps {
 
 @observer
 export class UniqueTagPicker extends Component<UniqueTagPickerProps, never> {
+    static defaultProps = {
+        label: null,
+        placeholder: null,
+        itemLimit: 1,
+        className: ''
+    };
+
     @autobind
     handleSelectionChange(tagItems?: ITag[]) {
         const { onSelectionChange } = this.props;

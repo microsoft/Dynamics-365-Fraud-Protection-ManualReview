@@ -15,12 +15,17 @@ interface DataHeaderProps<T> {
     onViewChange: (label: T) => void
     viewMap: Map<string, string>,
     buttonLook?: boolean
-    activeViewTab?: T;
+    activeViewTab: T;
 
 }
 
 @autoBind
 export class SwitchTabs<T> extends Component<DataHeaderProps<T>, never> {
+    static defaultProps = {
+        buttonLook: false,
+        className: ''
+    };
+
     handleViewSwitch(label: T) {
         const { onViewChange } = this.props;
 
